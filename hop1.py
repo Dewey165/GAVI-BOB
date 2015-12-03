@@ -5,11 +5,11 @@ Created on Thu Dec  3 12:20:52 2015
 @author: Ágúst
 """
 
-import csv as csv
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
-csv_file_object = csv.reader(open('Innflutningur-hljodvarp-vs-sjonvarp.csv'))
+#csv_file_object = csv.reader(open('import.csv'))
 
 settings = {}
 
@@ -47,3 +47,6 @@ T3['SjonTotal%'] = 100*np.round((T3['TotalSjónvörp'] / T3['TotalUnits']), 3)
 T3['HljodTotal%'] = 100*np.round((T3['TotalHljóðvarpstæki'] / T3['TotalUnits']),3)
 T3['Leading Import'] = np.where(T3['SjonTotal%'] > T3['HljodTotal%'], 'Sjónvarpstæki', "Hljóðvarpstæki")
 #print(T3)
+
+T3.plot(kind='bar')
+plt.show()
