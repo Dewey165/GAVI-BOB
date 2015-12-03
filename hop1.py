@@ -54,12 +54,17 @@ T3['TotalUnits'] = T3['TotalSjónvörp'] + T3['TotalHljóðvarpstæki']
 T3['SjonTotal%'] = 100*np.round((T3['TotalSjónvörp'] / T3['TotalUnits']), 3)
 T3['HljodTotal%'] = 100*np.round((T3['TotalHljóðvarpstæki'] / T3['TotalUnits']),3)
 T3['Leading Import'] = np.where(T3['SjonTotal%'] > T3['HljodTotal%'], 'Sjónvarpstæki', "Hljóðvarpstæki")
-#print(T3)
+print(T3)
 T3.to_csv('Table3.csv')
+<<<<<<< HEAD
 T4 = pd.DataFrame(index=['MaxYear', 'MaxUnits', 'MinYear', 'MinUnits','Average','1999vs2015','1999vs2015%'], columns=['Sjónvarpstæki','Hljóðvarpstæki'])
 
 plotT3 = T3.copy()
 plotT3.drop('HljodTotal%', axis=1, inplace=True)
 plotT3.drop('SjonTotal%', axis=1, inplace=True)
 plotT3.plot(kind='bar')
+=======
+#T4 = pd.DataFrame(index=['MaxYear', 'MaxUnits', 'MinYear', 'MinUnits','Average','1999vs2015','1999vs2015%'], columns=['Sjónvarpstæki','Hljóðvarpstæki'])
+T3.plot(kind='bar')
+>>>>>>> dfc02990b154cc8f3e07f137e49ce55d77a8f27b
 plt.show()
