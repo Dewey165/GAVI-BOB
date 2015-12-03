@@ -9,6 +9,7 @@ Created on Thu Dec  3 12:20:52 2015
 """
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 settings = {}
 
@@ -56,3 +57,5 @@ T3['Leading Import'] = np.where(T3['SjonTotal%'] > T3['HljodTotal%'], 'Sjónvarp
 #print(T3)
 T3.to_csv('Table3.csv')
 T4 = pd.DataFrame(index=['MaxYear', 'MaxUnits', 'MinYear', 'MinUnits','Average','1999vs2015','1999vs2015%'], columns=['Sjónvarpstæki','Hljóðvarpstæki'])
+T3.plot(kind='bar')
+plt.show()
