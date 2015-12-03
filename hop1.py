@@ -45,7 +45,7 @@ print(T2Hljodvarpstaeki)
 
 
 #Table 3 for Hljómvarpstæki
-index = pd.Series(i for i in T1Sjonvorp.Year)
+index = pd.Series(i for i in T1Sjonvorp.index)
 columns = ['TotalSjónvörp', 'TotalHljóðvarpstæki', 'TotalUnits', 'SjonTotal%', 'HljodTotal%', 'Leading Import']
 T3 = pd.DataFrame(index=index, columns=columns)
 T3['TotalSjónvörp'] = pd.Series([i for i in T1Sjonvorp.TotalUnits], index=T3.index)
@@ -54,8 +54,8 @@ T3['TotalUnits'] = T3['TotalSjónvörp'] + T3['TotalHljóðvarpstæki']
 T3['SjonTotal%'] = 100*np.round((T3['TotalSjónvörp'] / T3['TotalUnits']), 3)
 T3['HljodTotal%'] = 100*np.round((T3['TotalHljóðvarpstæki'] / T3['TotalUnits']),3)
 T3['Leading Import'] = np.where(T3['SjonTotal%'] > T3['HljodTotal%'], 'Sjónvarpstæki', "Hljóðvarpstæki")
-#print(T3)
+print(T3)
 T3.to_csv('Table3.csv')
-T4 = pd.DataFrame(index=['MaxYear', 'MaxUnits', 'MinYear', 'MinUnits','Average','1999vs2015','1999vs2015%'], columns=['Sjónvarpstæki','Hljóðvarpstæki'])
+#T4 = pd.DataFrame(index=['MaxYear', 'MaxUnits', 'MinYear', 'MinUnits','Average','1999vs2015','1999vs2015%'], columns=['Sjónvarpstæki','Hljóðvarpstæki'])
 T3.plot(kind='bar')
 plt.show()
