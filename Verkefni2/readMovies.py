@@ -31,7 +31,7 @@ cursor = conn.cursor()
 
 print("Connected!\n")
 
-moviesToBeInserted = open('movies.dat', encoding="utf8")
+moviesToBeInserted = open('movies.dat', encoding="latin")
 ''' We want to set up the database on run time not hardcoded!!!
 cursor.execute("""SELECT * from genres;""")
 isGenresEmpty = cursor.fetchall()
