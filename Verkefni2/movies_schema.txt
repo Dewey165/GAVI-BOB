@@ -8,7 +8,7 @@ CREATE TABLE ratings (
 id SERIAL,
 movie_id CHAR(9) references movies(movie_id),
 user_id VARCHAR(250),
-rating INT,
+rating CHAR(3),
 PRIMARY KEY (id));
 
 CREATE TABLE genres (
