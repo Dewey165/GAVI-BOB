@@ -88,12 +88,9 @@ cursor.execute(query, flat)
 
 rows = cursor.fetchall()
 print("Since You liked {}, then you might like: ".format(nameofmovie))
-reccomend = list(max(rows))
-print (type(reccomend))
-for x in reccomend:
-	title = x[0]
-	rating = x[1]
-	print("Title: {} | Ratings: {}".format(title, rating))
+reccomend = max(rows)
+title, rating = reccomend
+print("Title: {} | Ratings: {}".format(title, rating))
 
 cursor.close()
 conn.close()
