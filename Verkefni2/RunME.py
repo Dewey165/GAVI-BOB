@@ -26,39 +26,6 @@ for x in rows:
 	year = x[1]
 	rating = x[2]
 print("Title: {}| Year: {}| Rating: {}".format(title,year,rating))
-rating = 0
-genre = ''
-# for row in rows:
-# 	print(row)
-
-# value = input('Please write the ratings you want: ')
-# cursor.execute("SELECT m.title, ROUND(AVG(r.rating)::numeric,1) FROM movies m, ratings r WHERE m.movie_id = r.movie_id GROUP BY m.title HAVING AVG(r.rating) > {} ORDER BY m.title".format(value))
-
-# #Create here python code for taking select into python list/Dict for all movies abouve x rating
-# rows = cursor.fetchall()
-# rows = [list(i) for i in rows]
-# for row in rows:
-# 	title = row[0].strip()
-# 	rating = row[1]
-# 	print("{} Has Rating of: {}".format(title,rating))
-
-
-# cursor.execute("SELECT m.title, ROUND(AVG(r.rating)::numeric,1) AS Ratings FROM movies m, ratings r WHERE m.movie_id = r.movie_id GROUP BY m.title ORDER BY m.title")
-# rows = cursor.fetchall()
-# rowsList = [list(i) for i in rows]
-# for row in rowsList:
-# 	title = row[0].strip()
-# 	rating = row[1]
-# 	print("{} Has rating of: {}".format(title, rating))
-
-# genreofmovie = input("Plese write the genre of movie: ")
-# genreofmovie2 = input("2: ")
-# genreofmovie3 = input("3: ")
-# cursor.execute("SELECT m.title, g.name FROM movies m, moviegenres mg, genres g WHERE m.movie_id = mg.movie_id AND mg.genre_id = g.id AND g.name IN ('{}', '{}', '{}') GROUP BY g.name".format(genreofmovie, genreofmovie2, genreofmovie3))
-
-# rows = cursor.fetchall()
-# for row in rows:
-# 	print(row)
 
 cursor.execute("SELECT g.name FROM movies m, moviegenres mg, genres g WHERE m.movie_id = mg.movie_id AND mg.genre_id = g.id AND m.title = '{}' GROUP BY g.name".format(nameofmovie))
 
