@@ -21,8 +21,3 @@ movie_id CHAR(9) REFERENCES movies(movie_id),
 genre_id INT REFERENCES genres(id),
 PRIMARY KEY (movie_id, genre_id));
 
-
-SELECT count(r.rating) as Rating
-FROM ratings r, movies m
-WHERE m.movie_id = r.movie_id
-AND m.title = 'Bird on a Wire';
