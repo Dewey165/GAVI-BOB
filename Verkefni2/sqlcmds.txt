@@ -22,24 +22,13 @@ FROM ratings r, movies m
 WHERE m.movie_id = r.movie_id
 AND m.title = 'Toy Story';
 
-// RETURN avg rating of all movies
-SELECT m.title, AVG(r.rating) as Rating
-FROM movies m, ratings r
-WHERE m.movie_id = r.movie_id
-GROUP BY m.title
-ORDER BY m.title; 
 
-// RETURN Movies of specific genres, multiple columns with the same movie name
-SELECT m.title, g.name
-FROM movies m, moviegenres mg, genres g
-WHERE m.movie_id = mg.movie_id
-AND mg.genre_id = g.id
-AND g.name IN ('Action', 'Sci-Fi', 'Thriller');
-
-// RETURN all movies above certain ratings
-SELECT m.title, ROUND(AVG(r.rating)::numeric,1) as Ratings
-FROM movies m, ratings r
-WHERE m.movie_id = r.movie_id
-GROUP BY m.title
-HAVING AVG(r.rating) > 4.5
-ORDER BY m.title;
+// RETURN Movies of specific genres, multiple columns with 
+SELECT m.title, ROUND(AVG(r.rating)::NUMERIC,1) 
+FROM movies m, ratings r, genres g, moviegenres mg 
+WHERE m.movie_id = r.movie_id 
+AND g.id = mg.genre_id 
+AND mg.movie_id = m.movie_id 
+AND g.name IN(",".join(['%s'] * len(flat)))
+GROUP BY m.title 
+HAVING ROUND(AVG(r.rating)::NUMERIC,1) > rating
