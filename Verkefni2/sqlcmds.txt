@@ -1,0 +1,37 @@
+
+// Returns title, year, rating and genres by a name of a movie
+SELECT m.title, m.year, AVG(r.rating), g.name
+FROM movies m, ratings r, moviegenres mg, genres g
+WHERE m.movie_id = r.movie_id
+AND m.movie_id = mg.movie_id
+AND mg.genre_id = g.id
+AND m.title = 'Name of movie'
+GROUP BY m.title, m.year,g.name;
+
+// RETURN GENRES of movie
+SELECT g.name
+FROM movies m, moviegenres mg, genres g
+WHERE m.movie_id = mg.movie_id
+AND mg.genre_id = g.id
+AND m.title = 'Timecop'
+GROUP BY g.name;
+
+// RETURN avg rating of movie
+SELECT AVG(r.rating) as AvgRatings
+FROM ratings r, movies m
+WHERE m.movie_id = r.movie_id
+AND m.title = 'Toy Story';
+
+// RETURN avg rating of all movies
+SELECT m.title, AVG(r.rating) as Rating
+FROM movies m, ratings r
+WHERE m.movie_id = r.movie_id
+GROUP BY m.title
+ORDER BY m.title; 
+
+// RETURN Movies of specific genres, multiple columns with the same movie name
+SELECT m.title, g.name
+FROM movies m, moviegenres mg, genres g
+WHERE m.movie_id = mg.movie_id
+AND mg.genre_id = g.id
+AND g.name IN ('Action', 'Sci-Fi', 'Thriller');
