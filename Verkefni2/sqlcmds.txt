@@ -1,6 +1,6 @@
 
 // Returns title, year, rating and genres by a name of a movie
-SELECT m.title, m.year, AVG(r.rating), g.name
+SELECT m.title, m.year, ROUND(AVG(r.rating)::numeric,1), g.name
 FROM movies m, ratings r, moviegenres mg, genres g
 WHERE m.movie_id = r.movie_id
 AND m.movie_id = mg.movie_id
@@ -17,7 +17,7 @@ AND m.title = 'Timecop'
 GROUP BY g.name;
 
 // RETURN avg rating of movie
-SELECT AVG(r.rating) as AvgRatings
+SELECT ROUND(AVG(r.rating)::numeric,1) as AvgRatings
 FROM ratings r, movies m
 WHERE m.movie_id = r.movie_id
 AND m.title = 'Toy Story';
@@ -35,3 +35,11 @@ FROM movies m, moviegenres mg, genres g
 WHERE m.movie_id = mg.movie_id
 AND mg.genre_id = g.id
 AND g.name IN ('Action', 'Sci-Fi', 'Thriller');
+
+// RETURN all movies above certain ratings
+SELECT m.title, ROUND(AVG(r.rating)::numeric,1)
+FROM movies m, ratings r
+WHERE m.movie_id = r.movie_id
+GROUP BY m.title
+HAVING AVG(r.rating) > 4.5
+ORDER BY m.title;
