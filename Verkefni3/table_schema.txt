@@ -13,16 +13,16 @@ unit_total
 year 
 
 
-CREATE TABLE catagories (
-catagory_id SERIAL,
-name VARCHAR(250)
-PRIMARY KEY(catagory_id))
+CREATE TABLE categories (
+category_id INT,
+name VARCHAR(250),
+PRIMARY KEY(category_id));
 
 CREATE TABLE units (
 unit_id SERIAL,
-catagory_id INT REFERENCES catagories(catagory_id),
+category_id INT REFERENCES categories(category_id),
 unit_ton NUMERIC,
 unit_cost NUMERIC,
 unit_total NUMERIC,
-year INT
-PRIMARY KEY(unit_id))
+year INT,
+PRIMARY KEY(unit_id));
