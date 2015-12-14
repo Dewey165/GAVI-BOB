@@ -1,0 +1,24 @@
+INSERT INTO catagories(catagory_id, name) VALUES(%s, %s)
+INSERT INTO units(unit_id, catagory_id, unit_ton, unit_cost, unit_total, year) VALUES(%s, %s, %s, %s, %s, %s)
+
+cursor.execute(SELECT * from catagories;)
+isCatagoriesEmpty = cursor.fetchall()
+if not isCatagoriesEmpty:
+    counter = 1
+    for i in Catagories:
+        query = INSERT INTO catagories(catagory_id, name) VALUES(%s, %s)
+        print(i)
+        data = (counter, i)
+        cursor.execute(query, data)
+        counter += 1
+
+cursor.execute(SELECT * from units;)
+isUnitsEmpty = cursor.fetchall()
+if not isUnitsEmpty:
+    counter = 1
+    for i in Units:
+        query = INSERT INTO units(unit_id, catagory_id, unit_ton, unit_cost, unit_total, year) VALUES(%s, %s, %s, %s, %s, %s)
+        print(i)
+        data = (counter, i)
+        cursor.execute(query, data)
+        counter += 1
