@@ -71,5 +71,7 @@ for category_id, category_name in zip(CategoryNumber, CategoryName):
         conn.commit()
     rowCounter += 1
 
+
+print("SQL inserts completed!")
 cursor.close()
 conn.close()
