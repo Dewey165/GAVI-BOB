@@ -30,12 +30,15 @@ menuinput = input()
 
 if menuinput == '1':
     itemNumber = input('Sláðu inn númer á því sem þú vilt skoða: ')
+    cursor.execute("SELECT name FROM categories WHERE category_id = '{}'".format(itemNumber))
+    categoryName = cursor.fetchall()
     cursor.execute("SELECT unit_ton, unit_cost, year FROM units WHERE category_id = '{}'".format(itemNumber))
     data = cursor.fetchall()
 
+    categoryName = str(categoryName)
     itemOne = pd.DataFrame(data, columns=['Ton', 'Cost','Year'])
-    itemOne = itemOne.set_index('Year')
-    print("Nafn á vöruflokk")
+    
+    print(categoryName)
     print(itemOne)
     test = itemOne.copy()
     
