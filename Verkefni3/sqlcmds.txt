@@ -38,3 +38,7 @@ WHERE u.year = 2000;
 SELECT c.category_id
 FROM categories c
 WHERE c.name = 'Egg';
+
+SELECT c.name
+FROM categories c
+WHERE c.category_id = 54;

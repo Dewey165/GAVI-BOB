@@ -35,14 +35,13 @@ if menuinput == '1':
 
     itemOne = pd.DataFrame(data, columns=['Ton', 'Cost','Year'])
     itemOne = itemOne.set_index('Year')
+    print("Nafn á vöruflokk")
     print(itemOne)
     test = itemOne.copy()
     
     test = test.astype(float)
     test.plot(kind='bar')
     plt.show()
-    #except:
-    #    print('Error, Cannot access db')
 elif menuinput == '2':
     itemNumber1 = input('Sláðu inn númer á því sem þú vilt bera saman við: ')
     itemNumber2 = input('Sláðu inn númer á því sem þú vilt bera saman við: ')
@@ -55,12 +54,14 @@ elif menuinput == '2':
     itemTwo = pd.DataFrame(data2, columns=['Ton', 'Year'])
     itemTwo = itemTwo.set_index('Year')
 
-
+    print("heiti og hann er rauður á graphi")
     print(itemOne)
+    print("heiti og hann er blár á graphi")
     print(itemTwo)
 
     itemOne = itemOne.astype(float)
     itemTwo = itemTwo.astype(float)
+    
     plt.plot(itemOne,'r')
     plt.plot(itemTwo,'b')
     plt.show()
