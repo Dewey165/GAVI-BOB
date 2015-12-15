@@ -30,46 +30,47 @@ menuinput = input()
 
 if menuinput == '1':
     itemNumber = input('Sláðu inn númer á því sem þú vilt skoða: ')
-    print(itemNumber)
     cursor.execute("SELECT unit_ton, unit_cost, year FROM units WHERE category_id = '{}'".format(itemNumber))
-    #cursor.execute(PSQL_fetch_one_data, itemNumber)
     data = cursor.fetchall()
-    itemOne = pd.DataFrame(data)
+
+    itemOne = pd.DataFrame(data, columns=['Ton', 'Cost','Year'])
+    itemOne = itemOne.set_index('Year')
+    print(categoryNameTest)
     print(itemOne)
+    test = itemOne.copy()
+    
+    test = test.astype(float)
+    test.plot(kind='bar')
+    plt.show()
     #except:
     #    print('Error, Cannot access db')
 elif menuinput == '2':
+    itemNumber1 = input('Sláðu inn númer á því sem þú vilt bera saman við: ')
     itemNumber2 = input('Sláðu inn númer á því sem þú vilt bera saman við: ')
-    try:
+    cursor.execute("SELECT unit_ton, year FROM units WHERE category_id = '{}'".format(itemNumber1))
+    data1 = cursor.fetchall()
+    cursor.execute("SELECT unit_ton, year FROM units WHERE category_id = '{}'".format(itemNumber2))
+    data2 = cursor.fetchall()
+    itemOne = pd.DataFrame(data1, columns=['Ton', 'Year'])
+    itemOne = itemOne.set_index('Year')
+    itemTwo = pd.DataFrame(data2, columns=['Ton','Year'])
+    itemTwo = itemTwo.set_index('Year')
 
-        cursor.execute(PSQL_fetch_one_data, itemNumber2)
-        data1 = cursor.fetchall()
-        itemTwo = pd.DataFrame(data1)
-        print(itemTwo)
-    except:
-        print('Error, cant select from db')
+
+    print(itemOne)
+    print(itemTwo)
+
+    itemOne = itemOne.astype(float)
+    itemTwo = itemTwo.astype(float)
+    plt.plot(itemOne,'r')
+    plt.plot(itemTwo,'b')
+    plt.show()
+
 elif menuinput == '3':
-    cursor.execute("""SELECT * from categories;""")
+    cursor.execute("SELECT * from categories;")
     Intro = cursor.fetchall()
     for i in Intro:
         print(i)
-
-# try:
-#     cursor.execute(PSQL_fetch_one_data, itemNumber)
-#     data = cursor.fetchall()
-#     itemOne = pd.DataFrame(data)
-#     print(itemOne)
-# except:
-#     print('Error, Cannot access db')
-# if menuinput == '2':
-#     itemNumber2 = input('Sláðu inn númer á því sem þú vilt bera saman við: ')
-#     try:
-#         cursor.execute(PSQL_fetch_one_data, itemNumber2)
-#         data1 = cursor.fetchall()
-#         itemTwo = pd.DataFrame(data1)
-#         print(itemTwo)
-#     except:
-#         print('Error, cant select from db')
 
 else:
     print('Vesen')
