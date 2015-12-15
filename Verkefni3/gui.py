@@ -50,6 +50,7 @@ if menuinput == '1':
     itemOne = pd.DataFrame(data, columns=['Ton', 'Cost','Year'])
     itemOne = itemOne.set_index('Year')
     print('Flokkurinn heitir: {}'.format(categoryName))
+    del itemOne.index.name
     print(itemOne)
     test = itemOne.copy()
 
@@ -70,8 +71,10 @@ elif menuinput == '2':
     itemTwo = itemTwo.set_index('Year')
 
     print("heiti og hann er rauður á graphi")
+    del itemOne.index.name
     print(itemOne)
     print("heiti og hann er blár á graphi")
+    del itemTwo.index.name
     print(itemTwo)
 
     itemOne = itemOne.astype(float)
