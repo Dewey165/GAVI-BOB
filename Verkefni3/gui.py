@@ -34,10 +34,8 @@ if menuinput == '1':
     categoryName = cursor.fetchall()
     cursor.execute("SELECT unit_ton, unit_cost, year FROM units WHERE category_id = '{}'".format(itemNumber))
     data = cursor.fetchall()
-
-    categoryName = str(categoryName)
     itemOne = pd.DataFrame(data, columns=['Ton', 'Cost','Year'])
-    itemOne = itemOne.set_index('Year')
+    
     print(categoryName)
     print(itemOne)
     test = itemOne.copy()
@@ -47,7 +45,11 @@ if menuinput == '1':
     plt.show()
 elif menuinput == '2':
     itemNumber1 = input('Sláðu inn númer á því sem þú vilt bera saman við: ')
+    cursor.execute("SELECT name FROM categories WHERE category_id = '{}'".format(itemNumber1))
+    categoryName1 = cursor.fetchall()
     itemNumber2 = input('Sláðu inn númer á því sem þú vilt bera saman við: ')
+    cursor.execute("SELECT name FROM categories WHERE category_id = '{}'".format(itemNumber2))
+    categoryName2 = cursor.fetchall()
     cursor.execute("SELECT unit_ton, year FROM units WHERE category_id = '{}'".format(itemNumber1))
     data1 = cursor.fetchall()
     cursor.execute("SELECT unit_ton, year FROM units WHERE category_id = '{}'".format(itemNumber2))
@@ -56,10 +58,14 @@ elif menuinput == '2':
     itemOne = itemOne.set_index('Year')
     itemTwo = pd.DataFrame(data2, columns=['Ton', 'Year'])
     itemTwo = itemTwo.set_index('Year')
-
-    print("heiti og hann er rauður á graphi")
+    
+    list1 = categoryName1
+    str1 = ''.join(str(x) for x in list1).strip('()').strip(',')
+    print('Flokkurinn heitir: {} Og er rauður á grafi'.format(str1))
     print(itemOne)
-    print("heiti og hann er blár á graphi")
+    list2 = categoryName2
+    str2 = ''.join(str(x) for x in list2).strip('()').strip(',')
+    print('Flokkurinn heitir: {} Og er blár á grafi'.format(str2))
     print(itemTwo)
 
     itemOne = itemOne.astype(float)
