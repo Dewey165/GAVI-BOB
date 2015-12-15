@@ -1,6 +1,7 @@
 import psycopg2
 import numpy as np
 import pandas as pd
+import statistics
 import matplotlib.pyplot as plt
 
 #SQL queries
@@ -30,15 +31,25 @@ menuinput = input()
 
 if menuinput == '1':
     itemNumber = input('Sláðu inn númer á því sem þú vilt skoða: ')
+    
     cursor.execute("SELECT name FROM categories WHERE category_id = '{}'".format(itemNumber))
     categoryName = cursor.fetchall()
+    
     cursor.execute("SELECT unit_ton, unit_cost, year FROM units WHERE category_id = '{}'".format(itemNumber))
     data = cursor.fetchall()
+    
+    cursor.execute("SELECT unit_ton FROM units WHERE category_id = '{}'".format(itemNumber))
+    categoryTon = cursor.fetchall()
+    avgTons = float(np.mean(categoryTon))
+    print('Average tons: {0:.2f}'.format(avgTons))
+    variance = float(np.std(categoryTon))
+    print('Standard deviation is: {0:.2f}'.format(variance))
+
 
     categoryName = str(categoryName)
     itemOne = pd.DataFrame(data, columns=['Ton', 'Cost','Year'])
     itemOne = itemOne.set_index('Year')
-    print(categoryName)
+    print('Flokkurinn heitir: {}'.format(categoryName))
     print(itemOne)
     test = itemOne.copy()
 
