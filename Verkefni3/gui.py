@@ -45,10 +45,11 @@ if menuinput == '1':
     variance = float(np.std(categoryTon))
     print('Standard deviation is: {0:.2f}'.format(variance))
 
-    categoryName = str(categoryName)
+    list1 = categoryName
+    str1 = ''.join(str(x) for x in list1).strip('()').strip(',')
     itemOne = pd.DataFrame(data, columns=['Ton', 'Cost','Year'])
     itemOne = itemOne.set_index('Year')
-    print('Flokkurinn heitir: {}'.format(categoryName))
+    print('Flokkurinn heitir: {}'.format(str1))
     del itemOne.index.name
 
     print(itemOne)
