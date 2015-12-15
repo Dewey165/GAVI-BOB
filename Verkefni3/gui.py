@@ -41,9 +41,10 @@ if menuinput == '1':
     print(categoryName)
     print(itemOne)
     test = itemOne.copy()
-    
+
     test = test.astype(float)
     test.plot(kind='bar')
+    
     plt.show()
 elif menuinput == '2':
     itemNumber1 = input('Sláðu inn númer á því sem þú vilt bera saman við: ')
