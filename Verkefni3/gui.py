@@ -76,7 +76,7 @@ while quit == 1:
 
         #item number 2
         while errorCheck == 0:
-            itemNumber2 = input('Sláðu inn númer á vöruflokki sem þú vilt bera saman við {}'.format(str1))
+            itemNumber2 = input('Sláðu inn númer á vöruflokki sem þú vilt bera saman við {}: '.format(str1))
             cursor.execute("SELECT name FROM categories WHERE category_id = '{}'".format(itemNumber2))
             categoryName2 = cursor.fetchall()
             print(categoryName2)
@@ -107,13 +107,16 @@ while quit == 1:
         itemOne = itemOne.set_index('Year')
         itemTwo = pd.DataFrame(data2, columns=['Ton','Year'])
         itemTwo = itemTwo.set_index('Year')
-
+        del itemOne.index.name
+        del itemTwo.index.name
 
         list2 = categoryName2
         str2 = ''.join(str(x) for x in list2).strip('()').strip(',')
 
         print(itemOne)
+        print('\n')
         print(itemTwo)
+        print('\n')
         print('Flokkurinn heitir: {} Og er rauður á grafi'.format(str1))
         print('Flokkurinn heitir: {} Og er blár á grafi'.format(str2))
 
