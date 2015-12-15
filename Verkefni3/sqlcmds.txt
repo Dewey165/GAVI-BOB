@@ -1,0 +1,35 @@
+----- SELECT ton imported per year, for 1 category by ID
+SELECT DISTINCT c.name, u.unit_ton, u.year
+FROM categories c, units u
+WHERE c.category_id = u.category_id 
+AND c.category_id = 48
+ORDER BY u.year;
+
+----- SELECT Cost of imported per year, for 1 category by ID
+SELECT DISTINCT c.name, u.unit_cost, u.year
+FROM categories c, units u
+WHERE c.category_id = u.category_id 
+AND c.category_id = 48
+ORDER BY u.year;
+
+----- SELECT cost,ton and total imported per year, for 1 category by ID
+SELECT DISTINCT c.name, u.unit_ton, u.unit_cost, u.unit_total, u.year
+FROM categories c, units u
+WHERE c.category_id = u.category_id 
+AND c.category_id = 48
+ORDER BY u.year;
+
+----- SELECT total of ton of imported for a year 
+SELECT sum(u.unit_ton) AS TotalWeightImported
+FROM units u
+WHERE u.year = 2000;
+
+----- SELECT total of Cost of imported for a year 
+SELECT sum(u.unit_cost) AS TotalCostOfImported
+FROM units u
+WHERE u.year = 2000;
+
+----- SELECT total of Ton, Cost of imported for a year 
+SELECT sum(u.unit_ton) AS TotalTonOfImported, sum(u.unit_cost) AS TotalCostOfImported
+FROM units u
+WHERE u.year = 2000;
