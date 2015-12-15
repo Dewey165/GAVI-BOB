@@ -33,3 +33,8 @@ WHERE u.year = 2000;
 SELECT sum(u.unit_ton) AS TotalTonOfImported, sum(u.unit_cost) AS TotalCostOfImported
 FROM units u
 WHERE u.year = 2000;
+
+----- GET ID, by name of category
+SELECT c.category_id
+FROM categories c
+WHERE c.name = 'Egg';
