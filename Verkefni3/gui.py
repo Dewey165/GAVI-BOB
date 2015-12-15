@@ -11,7 +11,7 @@ PSQL_fetch_one_data = "SELECT unit_ton, unit_cost, year FROM units WHERE categor
 host = 'localhost'
 dbname = 'hop3' #Enter the name of the database
 username = 'postgres'
-pw = '' # enter password
+pw = 'Dewey123' # enter password
 
 conn_string = "host='{}' dbname='{}' user='{}' password='{}'".format(host, dbname, username, pw)
 print("Connecting to database {}.{} as {}".format(host, dbname, username))
@@ -19,11 +19,7 @@ conn = psycopg2.connect(conn_string)
 cursor = conn.cursor()
 print("Connected!\n")
 
-# cursor.execute("""SELECT * from categories;""")
-# Intro = cursor.fetchall()
-# for i in Intro:
-#     print(i)
-
+#Console options
 quit = 1
 while quit == 1:
         #Console
@@ -65,23 +61,53 @@ while quit == 1:
         print('Standard deviation is: {0:.2f}'.format(variance))
         plt.show()
     elif menuinput == '2':
-        itemNumber1 = input('Sláðu inn númer á því sem þú vilt bera saman við: ')
-        cursor.execute("SELECT name FROM categories WHERE category_id = '{}'".format(itemNumber1))
-        categoryName1 = cursor.fetchall()
-        itemNumber2 = input('Sláðu inn númer á því sem þú vilt bera saman við: ')
-        cursor.execute("SELECT name FROM categories WHERE category_id = '{}'".format(itemNumber2))
-        categoryName2 = cursor.fetchall()
-        cursor.execute("SELECT unit_ton, year FROM units WHERE category_id = '{}'".format(itemNumber1))
-        data1 = cursor.fetchall()
-        cursor.execute("SELECT unit_ton, year FROM units WHERE category_id = '{}'".format(itemNumber2))
-        data2 = cursor.fetchall()
+        #item number 1
+        errorCheck = 1
+        while errorCheck == 1:
+            itemNumber1 = input('Sláðu inn númer á vöruflokki: ')
+            cursor.execute("SELECT name FROM categories WHERE category_id = '{}'".format(itemNumber1))
+            categoryName1 = cursor.fetchall()
+            if not categoryName1:
+                print('Þessi tala er ekki til á skrá!, vinsamlegast reyndu aftur síðar...')
+            else:
+                errorCheck = 0
+                list1 = categoryName1
+                str1 = ''.join(str(x) for x in list1).strip('()').strip(',')
+
+        #item number 2
+        while errorCheck == 0:
+            itemNumber2 = input('Sláðu inn númer á vöruflokki sem þú vilt bera saman við {}'.format(str1))
+            cursor.execute("SELECT name FROM categories WHERE category_id = '{}'".format(itemNumber2))
+            categoryName2 = cursor.fetchall()
+            print(categoryName2)
+            if not categoryName2:
+                 print('Þessi tala er ekki til á skrá!, vinsamlegast reyndu aftur síðar...')
+            else:
+                errorCheck = 1
+        while errorCheck == 1:
+            print('Veldu úr eftirfarandi:')
+            print(' 1: Tons')
+            print(' 2: Cost')
+            compareItemsBy = input()
+            if compareItemsBy == '1':
+                cursor.execute("SELECT unit_ton, year FROM units WHERE category_id = '{}'".format(itemNumber1))
+                data1 = cursor.fetchall()
+                cursor.execute("SELECT unit_ton, year FROM units WHERE category_id = '{}'".format(itemNumber2))
+                data2 = cursor.fetchall()
+                errorCheck = 0
+            elif compareItemsBy == '2':
+                cursor.execute("SELECT unit_cost, year FROM units WHERE category_id = '{}'".format(itemNumber1))
+                data1 = cursor.fetchall()
+                cursor.execute("SELECT unit_cost, year FROM units WHERE category_id = '{}'".format(itemNumber2))
+                data2 = cursor.fetchall()
+                errorCheck = 0
+            else:
+                print('Ekki rétt valið!')
         itemOne = pd.DataFrame(data1, columns=['Ton','Year'])
         itemOne = itemOne.set_index('Year')
         itemTwo = pd.DataFrame(data2, columns=['Ton','Year'])
         itemTwo = itemTwo.set_index('Year')
 
-        list1 = categoryName1
-        str1 = ''.join(str(x) for x in list1).strip('()').strip(',')
 
         list2 = categoryName2
         str2 = ''.join(str(x) for x in list2).strip('()').strip(',')
