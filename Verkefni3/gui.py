@@ -18,8 +18,6 @@ conn = psycopg2.connect(conn_string)
 cursor = conn.cursor()
 print("Connected!\n")
 
-selecMenu = True
-
 # cursor.execute("""SELECT * from categories;""")
 # Intro = cursor.fetchall()
 # for i in Intro:
