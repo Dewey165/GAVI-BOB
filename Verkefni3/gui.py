@@ -35,7 +35,6 @@ if menuinput == '1':
 
     itemOne = pd.DataFrame(data, columns=['Ton', 'Cost','Year'])
     itemOne = itemOne.set_index('Year')
-    print(categoryNameTest)
     print(itemOne)
     test = itemOne.copy()
     
@@ -51,9 +50,9 @@ elif menuinput == '2':
     data1 = cursor.fetchall()
     cursor.execute("SELECT unit_ton, year FROM units WHERE category_id = '{}'".format(itemNumber2))
     data2 = cursor.fetchall()
-    itemOne = pd.DataFrame(data1, columns=['Ton', 'Year'])
+    itemOne = pd.DataFrame(data1, columns=['Ton','Year'])
     itemOne = itemOne.set_index('Year')
-    itemTwo = pd.DataFrame(data2, columns=['Ton','Year'])
+    itemTwo = pd.DataFrame(data2, columns=['Ton', 'Year'])
     itemTwo = itemTwo.set_index('Year')
 
 
