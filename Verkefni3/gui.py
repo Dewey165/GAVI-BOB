@@ -24,10 +24,10 @@ quit = 1
 while quit == 1:
         #Console
     print()
-    print('1. skoða einn vöruflokk')
-    print('2. Bera saman 2 vöruflokka')
-    print('3. Sjá lista yfir vöruflokka')
-    print('q  Til að hætta')
+    print('1: Skoða einn vöruflokk')
+    print('2: Bera saman 2 vöruflokka')
+    print('3: Sjá lista yfir vöruflokka')
+    print('q: Til að hætta')
     menuinput = input()
     if menuinput == '1':
         itemNumber = input('Sláðu inn númer á því sem þú vilt skoða: ')
