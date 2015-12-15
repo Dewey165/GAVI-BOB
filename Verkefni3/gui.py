@@ -37,7 +37,7 @@ if menuinput == '1':
 
     categoryName = str(categoryName)
     itemOne = pd.DataFrame(data, columns=['Ton', 'Cost','Year'])
-    
+    itemOne = itemOne.set_index('Year')
     print(categoryName)
     print(itemOne)
     test = itemOne.copy()
