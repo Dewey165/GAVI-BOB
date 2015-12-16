@@ -11,7 +11,7 @@ PSQL_fetch_one_data = "SELECT unit_ton, unit_cost, year FROM units WHERE categor
 host = 'localhost'
 dbname = 'hop3' #Enter the name of the database
 username = 'postgres'
-pw = '' # enter password
+pw = 'Dewey123' # enter password
 
 conn_string = "host='{}' dbname='{}' user='{}' password='{}'".format(host, dbname, username, pw)
 print("Connecting to database {}.{} as {}".format(host, dbname, username))
@@ -25,7 +25,7 @@ while quit == 1:
     #Console
     print()
     print('1: Skoða einn vöruflokk')
-    print('2: Bera saman 2 vöruflokka')
+    print('2: Bera saman tvo vöruflokka')
     print('3: Sjá lista yfir vöruflokka')
     print('q: Til að hætta')
     menuinput = input()
@@ -155,7 +155,8 @@ while quit == 1:
         #Set up the plot
         Red = plt.plot(itemOne,'r', label='{}'.format(str1))
         Blue = plt.plot(itemTwo,'b', label='{}'.format(str2))
-        plt.xticks( range(16), ('1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014'))
+        plt.xticks( range(16), ('1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009',
+                                '2010', '2011', '2012', '2013', '2014'))
         plt.title("{} vs {}".format(str1, str2))
         plt.grid(True)
         plt.legend(loc='best')
